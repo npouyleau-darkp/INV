@@ -135,93 +135,7 @@
         </div>
     </noscript>
 <!-- END OF BLOCK 1 -->
-<!-- START OF BLOCK 2: ELEGANT NATIONALITY SELECTION GRID CSS -->
-    <style>
-        .language-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-            margin-bottom: 35px;
-        }
-
-        .language-card {
-            background: var(--panel-bg);
-            border: 2px solid var(--border-color);
-            border-radius: 10px;
-            padding: 16px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            cursor: pointer;
-            user-select: none;
-            transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.15s ease;
-        }
-
-        .language-card:hover {
-            border-color: #3b82f6;
-            background: var(--container-bg);
-            transform: translateY(-2px);
-        }
-
-        .language-card.active {
-            border-color: #2563eb;
-            background: var(--container-bg);
-            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
-        }
-
-        .language-flag {
-            font-size: 24px;
-            line-height: 1;
-            display: inline-block;
-            min-width: 32px;
-            text-align: center;
-        }
-
-        .language-info {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-            overflow: hidden;
-        }
-
-        .language-name {
-            font-size: 14.5px;
-            font-weight: 700;
-            color: var(--title-color);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .language-region {
-            font-size: 12px;
-            font-weight: 500;
-            color: #64748b;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        @media screen and (-webkit-min-device-pixel-ratio:0) {
-            .language-flag { font-family: 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', sans-serif; }
-        }
-    </style>
-</head>
-<body>
-    <noscript>
-        <div class="noscript-hardlock">
-            <h1>JavaScript Required</h1>
-            <p>Security compliance protocols require JavaScript execution to be active to view this dashboard.</p>
-        </div>
-    </noscript>
-
-    <div class="screen-shield" id="greyShield">
-        <p style="background: #0f172a; padding: 20px 40px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">Content Protected</p>
-        <span style="font-size: 16px; font-weight: normal; margin-top: 10px; color: #0f172a; background: white; padding: 5px 15px; border-radius: 20px; font-weight: 600;">Bring your cursor back inside the window to reveal the panel.</span>
-    </div>
-<!-- END OF BLOCK 2 -->
-<!-- START OF BLOCK 3.1: INVITE SCREEN INITIALIZATION AND WESTERN LANGUAGE GRIDS -->
+<!-- START OF BLOCK 2: SYSTEM WRAPPERS AND SELECTION BOUNDARY INITIALIZATION -->
 <div id="mainApplicationWrapper">
     <div class="container">
         
@@ -240,7 +154,8 @@
             <h1 class="test-title">LQA Candidate Invite</h1>
             <button type="button" class="theme-toggle-btn" id="themeToggle" onclick="toggleDarkMode()">🌙 Dark Mode</button>
         </div>
-        
+<!-- END OF BLOCK 2 -->
+<!-- START OF BLOCK 3.1: SECURE INVITATION LAYOUT SYSTEM AND WESTERN LANGUAGE GRIDS -->
         <!-- Native submit submission tracking routing engine -->
         <form id="inviteForm" onsubmit="navigateToReviewVerification(); return false;">
             
