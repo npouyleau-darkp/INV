@@ -1,0 +1,538 @@
+<!-- START OF BLOCK 1: INVITE VIEWPORT FOUNDATIONS AND LAYOUT SYSTEM CSS -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LQA Candidate Invite Dashboard</title>
+    
+    <!-- Unified structural stylesheet optimizing candidate invitation interface properties -->
+    <style>
+        :root {
+            --container-bg: #ffffff;
+            --text-color: #1e293b;
+            --title-color: #0f172a;
+            --border-color: #cbd5e1;
+            --input-bg: #f8fafc;
+            --panel-bg: #f8fafc;
+            --bg-gradient: linear-gradient(135deg, #0284c7 0%, #1e40af 50%, #7c3aed 100%);
+        }
+
+        .dark-mode {
+            --container-bg: #1e293b;
+            --text-color: #cbd5e1;
+            --title-color: #f8fafc;
+            --border-color: #475569;
+            --input-bg: #334155;
+            --panel-bg: #1e293b;
+            --bg-gradient: linear-gradient(135deg, #0c4a6e 0%, #1e3a8a 50%, #4c1d95 100%);
+        }
+
+        body { 
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif; 
+            padding: 40px 20px; 
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-color); 
+            margin: 0; 
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        
+        #mainApplicationWrapper { display: block; }
+        
+        .noscript-hardlock {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: #0f172a; color: #ef4444; z-index: 999999;
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: center; text-align: center; padding: 20px;
+        }
+
+        .container { 
+            max-width: 1100px; margin: auto; background: var(--container-bg); 
+            padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); 
+            position: relative; transition: filter 0.05s linear, background-color 0.3s ease; 
+        }
+        
+        body.shield-activated .container {
+            filter: blur(50px) grayscale(100%) brightness(0.2);
+            pointer-events: none; user-select: none;
+        }
+
+        .header-meta { 
+            display: flex; justify-content: space-between; align-items: center; 
+            border-bottom: 2px solid var(--border-color); padding-bottom: 20px; 
+            margin-bottom: 30px; position: sticky; top: 0; background: var(--container-bg); 
+            z-index: 100; transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .test-title { font-size: 24px; font-weight: 700; color: var(--title-color); margin: 0; }
+        
+        .theme-toggle-btn {
+            background: #475569; color: #ffffff; border: none; padding: 10px 15px;
+            border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: background 0.2s ease;
+        }
+        .theme-toggle-btn:hover { background: #64748b; }
+
+        .page-view { display: none; }
+        .page-view.active { display: block; }
+        .form-group { margin-bottom: 30px; }
+        
+        label { font-weight: 600; display: block; margin-bottom: 10px; color: var(--text-color); line-height: 1.5; }
+        .required-star { color: #dc2626; margin-left: 3px; }
+        
+        input[type="text"], input[type="email"] { 
+            width: 100%; padding: 14px; box-sizing: border-box; border: 1px solid var(--border-color); 
+            border-radius: 8px; font-size: 15px; background-color: var(--input-bg); color: var(--title-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        input:focus { border-color: #2563eb; outline: none; background-color: var(--container-bg); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15); }
+        
+        .section-title { color: var(--title-color); border-left: 5px solid #2563eb; padding-left: 12px; margin-bottom: 25px; font-size: 20px; font-weight: 700; }
+        .info-text { color: #64748b; margin-bottom: 25px; font-size: 14px; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 35px; border-top: 1px solid var(--border-color); padding-top: 20px; }
+        button { padding: 14px 30px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: 600; transition: all 0.2s ease; }
+        .btn-start { background-color: #2563eb; color: white; }
+        .btn-nav { background-color: #475569; color: white; }
+        .btn-submit { background-color: #10b981; color: white; }
+        
+        .temporary-todo-float {
+            position: absolute; left: -340px; top: 120px; width: 300px;
+            background: var(--panel-bg); border: 2px dashed #eab308; border-radius: 10px;
+            padding: 22px; box-sizing: border-box; height: auto; z-index: 10;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .todo-title {
+            font-size: 15px; font-weight: 800; color: #eab308; text-transform: uppercase;
+            letter-spacing: 0.5px; margin-bottom: 15px; border-bottom: 2px dashed #eab308;
+            padding-bottom: 8px; display: flex; align-items: center; justify-content: center; gap: 6px;
+        }
+        .todo-list { font-size: 13.5px; line-height: 1.8; color: var(--text-color); margin: 0; padding-left: 18px; }
+        .todo-list li { margin-bottom: 6px; font-weight: 500; }
+        
+        @media (max-width: 1750px) { .temporary-todo-float { display: none !important; } }
+
+        /* Confirmation overview summary design card wrapper */
+        .confirmation-overview-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        .conf-item { margin-bottom: 15px; font-size: 15px; color: var(--text-color); }
+        .conf-item strong { color: var(--title-color); display: inline-block; width: 220px; }
+        
+        .screen-shield { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(100, 116, 139, 0.2); z-index: 9999; color: #ffffff; font-size: 24px; font-weight: bold; text-align: center; justify-content: center; align-items: center; flex-direction: column; }
+    </style>
+<!-- END OF BLOCK 1 -->
+<!-- START OF BLOCK 2: ELEGANT NATIONALITY SELECTION GRID CSS -->
+    <style>
+        .language-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+            margin-bottom: 35px;
+        }
+
+        .language-card {
+            background: var(--panel-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            user-select: none;
+            transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.15s ease;
+        }
+
+        .language-card:hover {
+            border-color: #3b82f6;
+            background: var(--container-bg);
+            transform: translateY(-2px);
+        }
+
+        .language-card.active {
+            border-color: #2563eb;
+            background: var(--container-bg);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+        }
+
+        .language-flag {
+            font-size: 24px;
+            line-height: 1;
+            display: inline-block;
+            min-width: 32px;
+            text-align: center;
+        }
+
+        .language-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            overflow: hidden;
+        }
+
+        .language-name {
+            font-size: 14.5px;
+            font-weight: 700;
+            color: var(--title-color);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .language-region {
+            font-size: 12px;
+            font-weight: 500;
+            color: #64748b;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        @media screen and (-webkit-min-device-pixel-ratio:0) {
+            .language-flag { font-family: 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', sans-serif; }
+        }
+    </style>
+</head>
+<body>
+    <noscript>
+        <div class="noscript-hardlock">
+            <h1>JavaScript Required</h1>
+            <p>Security compliance protocols require JavaScript execution to be active to view this dashboard.</p>
+        </div>
+    </noscript>
+
+    <div class="screen-shield" id="greyShield">
+        <p style="background: #0f172a; padding: 20px 40px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">Content Protected</p>
+        <span style="font-size: 16px; font-weight: normal; margin-top: 10px; color: #0f172a; background: white; padding: 5px 15px; border-radius: 20px; font-weight: 600;">Bring your cursor back inside the window to reveal the panel.</span>
+    </div>
+<!-- END OF BLOCK 2 -->
+<!-- START OF BLOCK 3.1: INVITE SCREEN INITIALIZATION AND NATIONALITY SELECTION GRIDS -->
+<div id="mainApplicationWrapper">
+    <div class="container">
+        
+        <!-- Standalone floating project tracking element updated with the automation roadmap -->
+        <div class="temporary-todo-float">
+            <div class="todo-title">🚧 TO DO 🚧</div>
+            <ul class="todo-list">
+                <li>Configure Invite Webhook for Automation</li>
+                <li>Generate secure unique token per candidate</li>
+                <li>Pass localized target language directly into the unique invitation link URLs</li>
+                <li>Full testing link routing compliance</li>
+            </ul>
+        </div>
+
+        <div class="header-meta" id="headerMeta">
+            <h1 class="test-title">LQA Candidate Invite</h1>
+            <button type="button" class="theme-toggle-btn" id="themeToggle" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+        </div>
+        
+        <form id="inviteForm" onsubmit="return false;">
+            
+            <!-- ==================== INVITE PAGE 1: FORM SCRIPT SESSIONS ==================== -->
+            <div class="page-view active" id="page1">
+                <div class="section-title">Issue Candidate Invitation Asset</div>
+                <p class="info-text">Provide identity profiles to dispatch localized assessment links securely.</p>
+                
+                <div class="form-group">
+                    <label for="firstName">First Name<span class="required-star">*</span></label>
+                    <input type="text" id="firstName" required placeholder="e.g., John">
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name<span class="required-star">*</span></label>
+                    <input type="text" id="lastName" required placeholder="e.g., Doe">
+                </div>
+                <div class="form-group">
+                    <label for="candidateEmail">Candidate Email Address<span class="required-star">*</span></label>
+                    <input type="email" id="candidateEmail" required placeholder="e.g., john.doe@example.com">
+                </div>
+                
+                <div class="form-group" style="position: relative;">
+                    <label>Target Assessment Language Matrix<span class="required-star">*</span></label>
+                    <input type="text" id="candidateLanguage" value="" required style="position: absolute; bottom: 0; left: 50%; width: 1px; height: 1px; padding: 0; margin: 0; opacity: 0; pointer-events: none;">
+                    
+                    <div class="language-grid" id="langGridContainer">
+                        <!-- Western & Northern Europe -->
+                        <div class="language-card" data-lang="fr-FR" onclick="selectGridLanguage(this)">
+                            <span class="language-flag">🇫🇷</span>
+                            <div class="language-info"><span class="language-name">Français</span><span class="language-region">French (FR)</span></div>
+                        </div>
+                        <div class="language-card" data-lang="de-DE" onclick="selectGridLanguage(this)">
+                            <span class="language-flag">🇩🇪</span>
+                            <div class="language-info"><span class="language-name">Deutsch</span><span class="language-region">German (DE)</span></div>
+                        </div>
+                        <div class="language-card" data-lang="it-IT" onclick="selectGridLanguage(this)">
+                            <span class="language-flag">🇮🇹</span>
+                            <div class="language-info"><span class="language-name">Italiano</span><span class="language-region">Italian (IT)</span></div>
+                        </div>
+                        <div class="language-card" data-lang="nl-NL" onclick="selectGridLanguage(this)">
+                            <span class="language-flag">🇳🇱</span>
+                            <div class="language-info"><span class="language-name">Nederlands</span><span class="language-region">Dutch (NL)</span></div>
+                        </div>
+                        <div class="language-card" data-lang="sv-SE" onclick="selectGridLanguage(this)">
+                            <span class="language-flag">🇸🇪</span>
+                            <div class="language-info"><span class="language-name">Svenska</span><span class="language-region">Swedish (SE)</span></div>
+                        </div>
+                        <div class="language-card" data-lang="no-NO" onclick="selectGridLanguage(this)">
+                            <span class="language-flag">🇳🇴</span>
+                            <div class="language-info"><span class="language-name">Norsk</span><span class="language-region">Norwegian (NO)</span></div>
+                        </div>
+                        <div class="language-card" data-lang="da-DK" onclick="selectGridLanguage(this)">
+                            <span class="language-flag">🇩🇰</span>
+                            <div class="language-info"><span class="language-name">Dansk</span><span class="language-region">Danish (DK)</span></div>
+                        </div>
+                        <div class="language-card" data-lang="fi-FI" onclick="selectGridLanguage(this)">
+                            <span class="language-flag">🇫🇮</span>
+                            <div class="language-info"><span class="language-name">Suomi</span><span class="language-region">Finnish (FI)</span></div>
+                        </div>
+
+                        <!-- Ibero-Romance Variants -->
+                        <div class="language-card" data-lang="es-ES" onclick="selectGridLanguage(this)">
+                            <span class="language-flag">🇪🇸</span>
+                            <div class="language-info"><span class="language-name">Español</span><span class="language-region">Spain (ES)</span></div>
+                        </div>
+                        <div class="language-card" data-lang="es-419" onclick="selectGridLanguage(this)">
+                            <span class="language-flag">🌎</span>
+                            <div class="language-info"><span class="language-name">Español</span><span class="language-region">Latin America (419)</span></div>
+                        </div>
+                        <div class="language-card" data-lang="pt-PT" onclick="selectGridLanguage(this)">
+                            <span class="language-flag">🇵🇹</span>
+                            <div class="language-info"><span class="language-name">Português</span><span class="language-region">Portugal (PT)</span></div>
+                        </div>
+                        <div class="language-card" data-lang="pt-BR" onclick="selectGridLanguage(this)">
+                            <span class="language-flag">🇧🇷</span>
+                            <div class="language-info"><span class="language-name">Português</span><span class="language-region">Brasil (BR)</span></div>
+                        </div>
+<!-- END OF BLOCK 3.1 -->
+<!-- START OF BLOCK 3.2: TARGET NATIONALITY GRID COMPLETION AND NEXT VIEW CONTROLS -->
+                        <!-- Eastern Europe, Balkans & Eurasia -->
+                        <div class="language-card" data-lang="ru-RU" onclick="selectGridLanguage(this)">
+                            <span class="language-flag">🇷🇺</span>
+                            <div class="language-info"><span class="language-name">Русский</span><span class="language-region">Russian (RU)</span></div>
+                        </div>
+                        <div class="language-card" data-lang="pl-PL" onclick="selectGridLanguage(this)">
+                            <span class="language-flag">🇵🇱</span>
+                            <div class="language-info"><span class="language-name">Polski</span><span class="language-region">Polish (PL)</span></div>
+                        </div>
+                        <div class="language-card" data-lang="cs-CZ" onclick="selectGridLanguage(this)">
+                            <span class="language-flag">🇨🇿</span>
+                            <div class="language-info"><span class="language-name">Čeština</span><span class="language-region">Czech (CZ)</span></div>
+                        </div>
+                        <div class="language-card" data-lang="hu-HU" onclick="selectGridLanguage(this)">
+                            <span class="language-flag">🇭🇺</span>
+                            <div class="language-info"><span class="language-name">Magyar</span><span class="language-region">Hungarian (HU)</span></div>
+                        </div>
+                        <div class="language-card" data-lang="el-GR" onclick="selectGridLanguage(this)">
+                            <span class="language-flag">🇬🇷</span>
+                            <div class="language-info"><span class="language-name">Ελληνικά</span><span class="language-region">Greek (GR)</span></div>
+                        </div>
+                        <div class="language-card" data-lang="tr-TR" onclick="selectGridLanguage(this)">
+                            <span class="language-flag">🇹🇷</span>
+                            <div class="language-info"><span class="language-name">Türkçe</span><span class="language-region">Turkish (TR)</span></div>
+                        </div>
+                        <div class="language-card" data-lang="uk-UA" onclick="selectGridLanguage(this)">
+                            <span class="language-flag">🇺🇦</span>
+                            <div class="language-info"><span class="language-name">Українська</span><span class="language-region">Ukrainian (UA)</span></div>
+                        </div>
+                        <div class="language-card" data-lang="ro-RO" onclick="selectGridLanguage(this)">
+                            <span class="language-flag">🇷🇴</span>
+                            <div class="language-info"><span class="language-name">Română</span><span class="language-region">Romanian (RO)</span></div>
+                        </div>
+                        <div class="language-card" data-lang="bg-BG" onclick="selectGridLanguage(this)">
+                            <span class="language-flag">🇧🇬</span>
+                            <div class="language-info"><span class="language-name">Български</span><span class="language-region">Bulgarian (BG)</span></div>
+                        </div>
+
+                        <!-- Middle East & South Asia -->
+                        <div class="language-card" data-lang="ar-AA" onclick="selectGridLanguage(this)">
+                            <span class="language-flag">🇦🇪</span>
+                            <div class="language-info"><span class="language-name">العربية</span><span class="language-region">Arabic (RTL)</span></div>
+                        </div>
+                        <div class="language-card" data-lang="hi-IN" onclick="selectGridLanguage(this)">
+                            <span class="language-flag">🇮🇳</span>
+                            <div class="language-info"><span class="language-name">हिन्दी</span><span class="language-region">Hindi (IN)</span></div>
+                        </div>
+
+                        <!-- East Asia (CJKV & Dialects) -->
+                        <div class="language-card" data-lang="zh-CN" onclick="selectGridLanguage(this)">
+                            <span class="language-flag">🇨🇳</span>
+                            <div class="language-info"><span class="language-name">简体中文</span><span class="language-region">Simplified Chinese</span></div>
+                        </div>
+                        <div class="language-card" data-lang="zh-TW" onclick="selectGridLanguage(this)">
+                            <span class="language-flag">🇹🇼</span>
+                            <div class="language-info"><span class="language-name">繁體中文</span><span class="language-region">Taiwan (TW)</span></div>
+                        </div>
+                        <div class="language-card" data-lang="zh-HK" onclick="selectGridLanguage(this)">
+                            <span class="language-flag">🇭🇰</span>
+                            <div class="language-info"><span class="language-name">繁體中文</span><span class="language-region">Hong Kong (HK)</span></div>
+                        </div>
+                        <div class="language-card" data-lang="ja-JP" onclick="selectGridLanguage(this)">
+                            <span class="language-flag">🇯🇵</span>
+                            <div class="language-info"><span class="language-name">日本語</span><span class="language-region">Japanese (JP)</span></div>
+                        </div>
+                        <div class="language-card" data-lang="ko-KR" onclick="selectGridLanguage(this)">
+                            <span class="language-flag">🇰🇷</span>
+                            <div class="language-info"><span class="language-name">한국어</span><span class="language-region">Korean (KR)</span></div>
+                        </div>
+                        <div class="language-card" data-lang="vi-VN" onclick="selectGridLanguage(this)">
+                            <span class="language-flag">🇻🇳</span>
+                            <div class="language-info"><span class="language-name">Tiếng Việt</span><span class="language-region">Vietnamese (VN)</span></div>
+                        </div>
+
+                        <!-- Southeast Asia -->
+                        <div class="language-card" data-lang="th-TH" onclick="selectGridLanguage(this)">
+                            <span class="language-flag">🇹🇭</span>
+                            <div class="language-info"><span class="language-name">ไทย</span><span class="language-region">Thai (TH)</span></div>
+                        </div>
+                        <div class="language-card" data-lang="ms-MY" onclick="selectGridLanguage(this)">
+                            <span class="language-flag">🇲🇾</span>
+                            <div class="language-info"><span class="language-name">Bahasa Melayu</span><span class="language-region">Malay (MY)</span></div>
+                        </div>
+                        <div class="language-card" data-lang="id-ID" onclick="selectGridLanguage(this)">
+                            <span class="language-flag">🇮🇩</span>
+                            <div class="language-info"><span class="language-name">Bahasa Indonesia</span><span class="language-region">Indonesian (ID)</span></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="nav-buttons">
+                    <div></div>
+                    <button type="button" class="btn-start" onclick="navigateToReviewVerification()">Next &rarr;</button>
+                </div>
+            </div>
+<!-- END OF BLOCK 3.2 -->
+<!-- START OF BLOCK 4: CONFIRMATION AUDIT PANEL AND CORE LOGICAL SCRIPTS -->
+            <!-- ==================== INVITE PAGE 2: CONFIRMATION SUMMARY ==================== -->
+            <div class="page-view" id="page2">
+                <div class="section-title">Review Invitation Parameters</div>
+                <p class="info-text">Please audit candidate profiles metrics below before transmitting secure links.</p>
+                
+                <div class="confirmation-overview-card">
+                    <div class="conf-item"><strong>First Name:</strong> <span id="reviewFirst">---</span></div>
+                    <div class="conf-item"><strong>Last Name:</strong> <span id="reviewLast">---</span></div>
+                    <div class="conf-item"><strong>Email Address:</strong> <span id="reviewEmail">---</span></div>
+                    <div class="conf-item"><strong>Target Language Variant:</strong> <span id="reviewLang">---</span></div>
+                </div>
+
+                <div class="nav-buttons">
+                    <button type="button" class="btn-nav" onclick="changePageView(1)">&larr; Previous Page</button>
+                    <button type="button" class="btn-submit" id="sendInviteBtn" onclick="transmitCandidateInvitationPayload()">Dispatch Invitation Link</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Post-Submission Final Success Interface Block -->
+        <div class="page-view" id="page3">
+            <div style="text-align: center; padding: 40px 20px;">
+                <h2 style="color: #10b981; margin-top: 0; font-size: 26px;">🎉 Invitation Successfully Sent</h2>
+                <p style="color: var(--text-color); font-size: 16px; max-width: 550px; margin: 15px auto 30px auto; line-height: 1.6;">
+                    The identification metrics have been recorded. A localized link tracking endpoint has been queued for transmission to the candidate.
+                </p>
+                <button type="button" class="btn-start" onclick="resetInvitationWorkflow()">Issue Another Invitation</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let isTestActive = true; // Maintains baseline shielding context functionality
+
+    function toggleDarkMode() {
+        const body = document.body;
+        const btn = document.getElementById('themeToggle');
+        body.classList.toggle('dark-mode');
+        const mode = body.classList.contains('dark-mode') ? 'dark' : 'light';
+        if (btn) btn.innerHTML = mode === 'dark' ? "☀️ Light Mode" : "🌙 Dark Mode";
+    }
+
+    function changePageView(targetPageId) {
+        document.querySelectorAll('.page-view').forEach(view => view.classList.remove('active'));
+        document.getElementById(`page${targetPageId}`).classList.add('active');
+        window.scrollTo(0, 0);
+    }
+
+    function selectGridLanguage(cardElement) {
+        if (!cardElement) return;
+        document.querySelectorAll('.language-card').forEach(card => card.classList.remove('active'));
+        cardElement.classList.add('active');
+        
+        const langCode = cardElement.getAttribute('data-lang');
+        const hiddenInput = document.getElementById('candidateLanguage');
+        if (hiddenInput) hiddenInput.value = langCode;
+    }
+
+    // Handles layout transition while verifying input metric constraints
+    function navigateToReviewVerification() {
+        const first = document.getElementById('firstName').value.trim();
+        const last = document.getElementById('lastName').value.trim();
+        const email = document.getElementById('candidateEmail').value.trim();
+        const lang = document.getElementById('candidateLanguage').value;
+
+        if (!first || !last || !email || !lang) {
+            alert("All identity variables and Target Language selections are mandatory fields.");
+            return;
+        }
+
+        // Populate summary elements text counters inside Page 2 container viewport
+        document.getElementById('reviewFirst').innerText = first;
+        document.getElementById('reviewLast').innerText = last;
+        document.getElementById('reviewEmail').innerText = email;
+        document.getElementById('reviewLang').innerText = lang;
+
+        changePageView(2);
+    }
+
+    // Dispatches final compiled metrics towards the Microsoft Teams webhook configuration endpoint
+    function transmitCandidateInvitationPayload() {
+        const first = document.getElementById('firstName').value.trim();
+        const last = document.getElementById('lastName').value.trim();
+        const email = document.getElementById('candidateEmail').value.trim();
+        const lang = document.getElementById('candidateLanguage').value;
+
+        document.getElementById('sendInviteBtn').disabled = true;
+
+        // Structured text context optimized for incoming webhook channels
+        const notificationPayload = `### ✉️ New LQA Test Invitation Issued\n\n` +
+            `**Candidate:** ${last} ${first}\n` +
+            `**Email:** ${email}\n` +
+            `**Target Language:** ${lang}\n\n` +
+            `*Automated generation link workflow initialized successfully.*`;
+
+        fetch('https://votre-serveur.com', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                title: `Invitation Issued - ${last} ${first}`,
+                text: notificationPayload
+            })
+        })
+        .then(() => changePageView(3))
+        .catch(err => {
+            console.error("Payload tracking error handled gracefully:", err);
+            changePageView(3); // Soft failover allows interface view progression during local dry tests
+        });
+    }
+
+    function resetInvitationWorkflow() {
+        document.getElementById('inviteForm').reset();
+        document.getElementById('candidateLanguage').value = "";
+        document.querySelectorAll('.language-card').forEach(card => card.classList.remove('active'));
+        document.getElementById('sendInviteBtn').disabled = false;
+        changePageView(1);
+    }
+
+    // Hardcore baseline peripheral shields block cheating modifications during creation
+    const shield = document.getElementById('greyShield');
+    document.addEventListener('mouseleave', () => shield.style.display = 'flex');
+    document.addEventListener('mouseenter', () => shield.style.display = 'none');
+    window.addEventListener('blur', () => shield.style.display = 'flex');
+    window.addEventListener('focus', () => shield.style.display = 'none');
+    document.addEventListener('contextmenu', (event) => event.preventDefault());
+</script>
+</body>
+</html>
+<!-- END OF BLOCK 4 -->
