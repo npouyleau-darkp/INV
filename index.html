@@ -154,6 +154,24 @@
             <h1 class="test-title">LQA Candidate Invite</h1>
             <button type="button" class="theme-toggle-btn" id="themeToggle" onclick="toggleDarkMode()">🌙 Dark Mode</button>
         </div>
+
+    <!-- Additional integrated styles overriding layout specifications for windows emoji safety flags -->
+    <style>
+        .language-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 15px; margin-top: 20px; margin-bottom: 35px; }
+        .language-card { background: var(--panel-bg); border: 2px solid var(--border-color); border-radius: 10px; padding: 14px; display: flex; align-items: center; gap: 14px; cursor: pointer; user-select: none; transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.15s ease; }
+        .language-card:hover { border-color: #3b82f6; background: var(--container-bg); transform: translateY(-2px); }
+        .language-card.active { border-color: #2563eb; background: var(--container-bg); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15); }
+        
+        /* High-definition SVG flag layout container ensuring accurate cross-platform Windows rendering */
+        .vector-flag-icon { width: 32px; height: 24px; object-fit: cover; border-radius: 3px; border: 1px solid rgba(0,0,0,0.1); box-sizing: border-box; }
+        .language-info { display: flex; flex-direction: column; gap: 1px; overflow: hidden; }
+        
+        /* Enforces prominent English language naming standards */
+        .language-name-en { font-size: 15px; font-weight: 800; color: var(--title-color); text-transform: uppercase; letter-spacing: 0.3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        
+        /* Subdued baseline layout handles abbreviations and native structural tags */
+        .language-sub-native { font-size: 11.5px; font-weight: 600; color: #64748b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    </style>
 <!-- END OF BLOCK 2 -->
 <!-- START OF BLOCK 3.1: SECURE INVITATION LAYOUT SYSTEM AND WESTERN LANGUAGE GRIDS -->
         <!-- Native submit submission tracking routing engine -->
@@ -184,55 +202,150 @@
                     
                     <div class="language-grid" id="langGridContainer">
                         <!-- Western & Northern Europe -->
-                        <div class="language-card" data-lang="fr-FR" onclick="selectGridLanguage(this)"><span class="language-flag">🇫🇷</span><div class="language-info"><span class="language-name">Français</span><span class="language-region">French (FR)</span></div></div>
-                        <div class="language-card" data-lang="de-DE" onclick="selectGridLanguage(this)"><span class="language-flag">🇩🇪</span><div class="language-info"><span class="language-name">Deutsch</span><span class="language-region">German (DE)</span></div></div>
-                        <div class="language-card" data-lang="it-IT" onclick="selectGridLanguage(this)"><span class="language-flag">🇮🇹</span><div class="language-info"><span class="language-name">Italiano</span><span class="language-region">Italian (IT)</span></div></div>
-                        <div class="language-card" data-lang="nl-NL" onclick="selectGridLanguage(this)"><span class="language-flag">🇳🇱</span><div class="language-info"><span class="language-name">Nederlands</span><span class="language-region">Dutch (NL)</span></div></div>
-                        <div class="language-card" data-lang="sv-SE" onclick="selectGridLanguage(this)"><span class="language-flag">🇸🇪</span><div class="language-info"><span class="language-name">Svenska</span><span class="language-region">Swedish (SE)</span></div></div>
-                        <div class="language-card" data-lang="no-NO" onclick="selectGridLanguage(this)"><span class="language-flag">🇳🇴</span><div class="language-info"><span class="language-name">Norsk</span><span class="language-region">Norwegian (NO)</span></div></div>
-                        <div class="language-card" data-lang="da-DK" onclick="selectGridLanguage(this)"><span class="language-flag">🇩🇰</span><div class="language-info"><span class="language-name">Dansk</span><span class="language-region">Danish (DK)</span></div></div>
-                        <div class="language-card" data-lang="fi-FI" onclick="selectGridLanguage(this)"><span class="language-flag">🇫🇮</span><div class="language-info"><span class="language-name">Suomi</span><span class="language-region">Finnish (FI)</span></div></div>
+                        <div class="language-card" data-lang="fr-FR" onclick="selectGridLanguage(this)">
+                            <img src="https://flagcdn.com" class="vector-flag-icon" alt="FR">
+                            <div class="language-info"><span class="language-name-en">French</span><span class="language-sub-native">FR - Français</span></div>
+                        </div>
+                        <div class="language-card" data-lang="de-DE" onclick="selectGridLanguage(this)">
+                            <img src="https://flagcdn.com" class="vector-flag-icon" alt="DE">
+                            <div class="language-info"><span class="language-name-en">German</span><span class="language-sub-native">DE - Deutsch</span></div>
+                        </div>
+                        <div class="language-card" data-lang="it-IT" onclick="selectGridLanguage(this)">
+                            <img src="https://flagcdn.com" class="vector-flag-icon" alt="IT">
+                            <div class="language-info"><span class="language-name-en">Italian</span><span class="language-sub-native">IT - Italiano</span></div>
+                        </div>
+                        <div class="language-card" data-lang="nl-NL" onclick="selectGridLanguage(this)">
+                            <img src="https://flagcdn.com" class="vector-flag-icon" alt="NL">
+                            <div class="language-info"><span class="language-name-en">Dutch</span><span class="language-sub-native">NL - Nederlands</span></div>
+                        </div>
+                        <div class="language-card" data-lang="sv-SE" onclick="selectGridLanguage(this)">
+                            <img src="https://flagcdn.com" class="vector-flag-icon" alt="SE">
+                            <div class="language-info"><span class="language-name-en">Swedish</span><span class="language-sub-native">SE - Svenska</span></div>
+                        </div>
+                        <div class="language-card" data-lang="no-NO" onclick="selectGridLanguage(this)">
+                            <img src="https://flagcdn.com" class="vector-flag-icon" alt="NO">
+                            <div class="language-info"><span class="language-name-en">Norwegian</span><span class="language-sub-native">NO - Norsk</span></div>
+                        </div>
+                        <div class="language-card" data-lang="da-DK" onclick="selectGridLanguage(this)">
+                            <img src="https://flagcdn.com" class="vector-flag-icon" alt="DK">
+                            <div class="language-info"><span class="language-name-en">Danish</span><span class="language-sub-native">DK - Dansk</span></div>
+                        </div>
+                        <div class="language-card" data-lang="fi-FI" onclick="selectGridLanguage(this)">
+                            <img src="https://flagcdn.com" class="vector-flag-icon" alt="FI">
+                            <div class="language-info"><span class="language-name-en">Finnish</span><span class="language-sub-native">FI - Suomi</span></div>
+                        </div>
 
                         <!-- Ibero-Romance Variants -->
-                        <div class="language-card" data-lang="es-ES" onclick="selectGridLanguage(this)"><span class="language-flag">🇪🇸</span><div class="language-info"><span class="language-name">Español</span><span class="language-region">Spain (ES)</span></div></div>
-                        <div class="language-card" data-lang="es-419" onclick="selectGridLanguage(this)"><span class="language-flag">🌎</span><div class="language-info"><span class="language-name">Español</span><span class="language-region">Latin America (419)</span></div></div>
-                        <div class="language-card" data-lang="pt-PT" onclick="selectGridLanguage(this)"><span class="language-flag">🇵🇹</span><div class="language-info"><span class="language-name">Português</span><span class="language-region">Portugal (PT)</span></div></div>
-                        <div class="language-card" data-lang="pt-BR" onclick="selectGridLanguage(this)"><span class="language-flag">🇧🇷</span><div class="language-info"><span class="language-name">Português</span><span class="language-region">Brasil (BR)</span></div></div>
+                        <div class="language-card" data-lang="es-ES" onclick="selectGridLanguage(this)">
+                            <img src="https://flagcdn.com" class="vector-flag-icon" alt="ES">
+                            <div class="language-info"><span class="language-name-en">Spanish</span><span class="language-sub-native">ES - España</span></div>
+                        </div>
+                        <div class="language-card" data-lang="es-419" onclick="selectGridLanguage(this)">
+                            <img src="https://flagcdn.com" class="vector-flag-icon" alt="LATAM" onerror="this.src='https://flagcdn.com'">
+                            <div class="language-info"><span class="language-name-en">Spanish</span><span class="language-sub-native">419 - LatAm</span></div>
+                        </div>
+                        <div class="language-card" data-lang="pt-PT" onclick="selectGridLanguage(this)">
+                            <img src="https://flagcdn.com" class="vector-flag-icon" alt="PT">
+                            <div class="language-info"><span class="language-name-en">Portuguese</span><span class="language-sub-native">PT - Portugal</span></div>
+                        </div>
+                        <div class="language-card" data-lang="pt-BR" onclick="selectGridLanguage(this)">
+                            <img src="https://flagcdn.com" class="vector-flag-icon" alt="BR">
+                            <div class="language-info"><span class="language-name-en">Portuguese</span><span class="language-sub-native">BR - Brasil</span></div>
+                        </div>
 <!-- END OF BLOCK 3.1 -->
 <!-- START OF BLOCK 3.2: EASTERN AND ASIAN REGIONAL TARGET GRID COMPLETION -->
                         <!-- Eastern Europe, Balkans & Eurasia -->
-                        <div class="language-card" data-lang="ru-RU" onclick="selectGridLanguage(this)"><span class="language-flag">🇷🇺</span><div class="language-info"><span class="language-name">Русский</span><span class="language-region">Russian (RU)</span></div></div>
-                        <div class="language-card" data-lang="pl-PL" onclick="selectGridLanguage(this)"><span class="language-flag">🇵🇱</span><div class="language-info"><span class="language-name">Polski</span><span class="language-region">Polish (PL)</span></div></div>
-                        <div class="language-card" data-lang="cs-CZ" onclick="selectGridLanguage(this)"><span class="language-flag">🇨🇿</span><div class="language-info"><span class="language-name">Čeština</span><span class="language-region">Czech (CZ)</span></div></div>
-                        <div class="language-card" data-lang="hu-HU" onclick="selectGridLanguage(this)"><span class="language-flag">🇭🇺</span><div class="language-info"><span class="language-name">Magyar</span><span class="language-region">Hungarian (HU)</span></div></div>
-                        <div class="language-card" data-lang="el-GR" onclick="selectGridLanguage(this)"><span class="language-flag">🇬🇷</span><div class="language-info"><span class="language-name">Ελληνικά</span><span class="language-region">Greek (GR)</span></div></div>
-                        <div class="language-card" data-lang="tr-TR" onclick="selectGridLanguage(this)"><span class="language-flag">🇹🇷</span><div class="language-info"><span class="language-name">Türkçe</span><span class="language-region">Turkish (TR)</span></div></div>
-                        <div class="language-card" data-lang="uk-UA" onclick="selectGridLanguage(this)"><span class="language-flag">🇺🇦</span><div class="language-info"><span class="language-name">Українська</span><span class="language-region">Ukrainian (UA)</span></div></div>
-                        <div class="language-card" data-lang="ro-RO" onclick="selectGridLanguage(this)"><span class="language-flag">🇷🇴</span><div class="language-info"><span class="language-name">Română</span><span class="language-region">Romanian (RO)</span></div></div>
-                        <div class="language-card" data-lang="bg-BG" onclick="selectGridLanguage(this)"><span class="language-flag">🇧🇬</span><div class="language-info"><span class="language-name">Български</span><span class="language-region">Bulgarian (BG)</span></div></div>
+                        <div class="language-card" data-lang="ru-RU" onclick="selectGridLanguage(this)">
+                            <img src="https://flagcdn.com" class="vector-flag-icon" alt="RU">
+                            <div class="language-info"><span class="language-name-en">Russian</span><span class="language-sub-native">RU - Русский</span></div>
+                        </div>
+                        <div class="language-card" data-lang="pl-PL" onclick="selectGridLanguage(this)">
+                            <img src="https://flagcdn.com" class="vector-flag-icon" alt="PL">
+                            <div class="language-info"><span class="language-name-en">Polish</span><span class="language-sub-native">PL - Polski</span></div>
+                        </div>
+                        <div class="language-card" data-lang="cs-CZ" onclick="selectGridLanguage(this)">
+                            <img src="https://flagcdn.com" class="vector-flag-icon" alt="CZ">
+                            <div class="language-info"><span class="language-name-en">Czech</span><span class="language-sub-native">CZ - Čeština</span></div>
+                        </div>
+                        <div class="language-card" data-lang="hu-HU" onclick="selectGridLanguage(this)">
+                            <img src="https://flagcdn.com" class="vector-flag-icon" alt="HU">
+                            <div class="language-info"><span class="language-name-en">Hungarian</span><span class="language-sub-native">HU - Magyar</span></div>
+                        </div>
+                        <div class="language-card" data-lang="el-GR" onclick="selectGridLanguage(this)">
+                            <img src="https://flagcdn.com" class="vector-flag-icon" alt="GR">
+                            <div class="language-info"><span class="language-name-en">Greek</span><span class="language-sub-native">GR - Ελληνικά</span></div>
+                        </div>
+                        <div class="language-card" data-lang="tr-TR" onclick="selectGridLanguage(this)">
+                            <img src="https://flagcdn.com" class="vector-flag-icon" alt="TR">
+                            <div class="language-info"><span class="language-name-en">Turkish</span><span class="language-sub-native">TR - Türkçe</span></div>
+                        </div>
+                        <div class="language-card" data-lang="uk-UA" onclick="selectGridLanguage(this)">
+                            <img src="https://flagcdn.com" class="vector-flag-icon" alt="UA">
+                            <div class="language-info"><span class="language-name-en">Ukrainian</span><span class="language-sub-native">UA - Українська</span></div>
+                        </div>
+                        <div class="language-card" data-lang="ro-RO" onclick="selectGridLanguage(this)">
+                            <img src="https://flagcdn.com" class="vector-flag-icon" alt="RO">
+                            <div class="language-info"><span class="language-name-en">Romanian</span><span class="language-sub-native">RO - Română</span></div>
+                        </div>
+                        <div class="language-card" data-lang="bg-BG" onclick="selectGridLanguage(this)">
+                            <img src="https://flagcdn.com" class="vector-flag-icon" alt="BG">
+                            <div class="language-info"><span class="language-name-en">Bulgarian</span><span class="language-sub-native">BG - Български</span></div>
+                        </div>
 
                         <!-- Middle East & South Asia -->
-                        <div class="language-card" data-lang="ar-AA" onclick="selectGridLanguage(this)"><span class="language-flag">🇦🇪</span><div class="language-info"><span class="language-name">العربية</span><span class="language-region">Arabic (RTL)</span></div></div>
-                        <div class="language-card" data-lang="hi-IN" onclick="selectGridLanguage(this)"><span class="language-flag">🇮🇳</span><div class="language-info"><span class="language-name">हिन्दी</span><span class="language-region">Hindi (IN)</span></div></div>
+                        <div class="language-card" data-lang="ar-AA" onclick="selectGridLanguage(this)">
+                            <img src="https://flagcdn.com" class="vector-flag-icon" alt="AR">
+                            <div class="language-info"><span class="language-name-en">Arabic</span><span class="language-sub-native">AA - العربية</span></div>
+                        </div>
+                        <div class="language-card" data-lang="hi-IN" onclick="selectGridLanguage(this)">
+                            <img src="https://flagcdn.com" class="vector-flag-icon" alt="HI">
+                            <div class="language-info"><span class="language-name-en">Hindi</span><span class="language-sub-native">IN - हिन्दी</span></div>
+                        </div>
 
                         <!-- East Asia (CJKV & Dialects) -->
-                        <div class="language-card" data-lang="zh-CN" onclick="selectGridLanguage(this)"><span class="language-flag">🇨🇳</span><div class="language-info"><span class="language-name">简体中文</span><span class="language-region">Simplified Chinese</span></div></div>
-                        <div class="language-card" data-lang="zh-TW" onclick="selectGridLanguage(this)"><span class="language-flag">🇹🇼</span><div class="language-info"><span class="language-name">繁體中文</span><span class="language-region">Taiwan (TW)</span></div></div>
-                        <div class="language-card" data-lang="zh-HK" onclick="selectGridLanguage(this)"><span class="language-flag">🇭🇰</span><div class="language-info"><span class="language-name">繁體中文</span><span class="language-region">Hong Kong (HK)</span></div></div>
-                        <div class="language-card" data-lang="ja-JP" onclick="selectGridLanguage(this)"><span class="language-flag">🇯🇵</span><div class="language-info"><span class="language-name">日本語</span><span class="language-region">Japanese (JP)</span></div></div>
-                        <div class="language-card" data-lang="ko-KR" onclick="selectGridLanguage(this)"><span class="language-flag">🇰🇷</span><div class="language-info"><span class="language-name">한국어</span><span class="language-region">Korean (KR)</span></div></div>
-                        <div class="language-card" data-lang="vi-VN" onclick="selectGridLanguage(this)"><span class="language-flag">🇻🇳</span><div class="language-info"><span class="language-name">Tiếng Việt</span><span class="language-region">Vietnamese (VN)</span></div></div>
+                        <div class="language-card" data-lang="zh-CN" onclick="selectGridLanguage(this)">
+                            <img src="https://flagcdn.com" class="vector-flag-icon" alt="CN">
+                            <div class="language-info"><span class="language-name-en">Chinese (Simp)</span><span class="language-sub-native">CN - 简体中文</span></div>
+                        </div>
+                        <div class="language-card" data-lang="zh-TW" onclick="selectGridLanguage(this)">
+                            <img src="https://flagcdn.com" class="vector-flag-icon" alt="TW">
+                            <div class="language-info"><span class="language-name-en">Taiwanese</span><span class="language-sub-native">TW - 繁體中文</span></div>
+                        </div>
+                        <div class="language-card" data-lang="zh-HK" onclick="selectGridLanguage(this)">
+                            <img src="https://flagcdn.com" class="vector-flag-icon" alt="HK">
+                            <div class="language-info"><span class="language-name-en">Cantonese</span><span class="language-sub-native">HK - 繁體中文</span></div>
+                        </div>
+                        <div class="language-card" data-lang="ja-JP" onclick="selectGridLanguage(this)">
+                            <img src="https://flagcdn.com" class="vector-flag-icon" alt="JP">
+                            <div class="language-info"><span class="language-name-en">Japanese</span><span class="language-sub-native">JP - 日本語</span></div>
+                        </div>
+                        <div class="language-card" data-lang="ko-KR" onclick="selectGridLanguage(this)">
+                            <img src="https://flagcdn.com" class="vector-flag-icon" alt="KR">
+                            <div class="language-info"><span class="language-name-en">Korean</span><span class="language-sub-native">KR - 한국어</span></div>
+                        </div>
+                        <div class="language-card" data-lang="vi-VN" onclick="selectGridLanguage(this)">
+                            <img src="https://flagcdn.com" class="vector-flag-icon" alt="VN">
+                            <div class="language-info"><span class="language-name-en">Vietnamese</span><span class="language-sub-native">VN - Tiếng Việt</span></div>
+                        </div>
 
                         <!-- Southeast Asia -->
-                        <div class="language-card" data-lang="th-TH" onclick="selectGridLanguage(this)"><span class="language-flag">🇹🇭</span><div class="language-info"><span class="language-name">ไทย</span><span class="language-region">Thai (TH)</span></div></div>
-                        <div class="language-card" data-lang="ms-MY" onclick="selectGridLanguage(this)"><span class="language-flag">🇲🇾</span><div class="language-info"><span class="language-name">Bahasa Melayu</span><span class="language-region">Malay (MY)</span></div></div>
-                        <div class="language-card" data-lang="id-ID" onclick="selectGridLanguage(this)"><span class="language-flag">🇮🇩</span><div class="language-info"><span class="language-name">Bahasa Indonesia</span><span class="language-region">Indonesian (ID)</span></div></div>
+                        <div class="language-card" data-lang="th-TH" onclick="selectGridLanguage(this)">
+                            <img src="https://flagcdn.com" class="vector-flag-icon" alt="TH">
+                            <div class="language-info"><span class="language-name-en">Thai</span><span class="language-sub-native">TH - ไทย</span></div>
+                        </div>
+                        <div class="language-card" data-lang="ms-MY" onclick="selectGridLanguage(this)">
+                            <img src="https://flagcdn.com" class="vector-flag-icon" alt="MY">
+                            <div class="language-info"><span class="language-name-en">Malay</span><span class="language-sub-native">MY - Bahasa Melayu</span></div>
+                        </div>
+                        <div class="language-card" data-lang="id-ID" onclick="selectGridLanguage(this)">
+                            <img src="https://flagcdn.com" class="vector-flag-icon" alt="ID">
+                            <div class="language-info"><span class="language-name-en">Indonesian</span><span class="language-sub-native">ID - Bahasa Indonesia</span></div>
+                        </div>
                     </div>
                 </div>
                 
                 <div class="nav-buttons">
                     <div></div>
-                    <!-- Submit type button relies on native form requirements engine directly -->
                     <button type="submit" class="btn-start">Next &rarr;</button>
                 </div>
             </div>
@@ -247,7 +360,7 @@
                     <div class="conf-item"><strong>First Name:</strong> <span id="reviewFirst">---</span></div>
                     <div class="conf-item"><strong>Last Name:</strong> <span id="reviewLast">---</span></div>
                     <div class="conf-item"><strong>Email Address:</strong> <span id="reviewEmail">---</span></div>
-                    <div class="conf-item"><strong>Target Language Variant:</strong> <span id="reviewLang">---</span></div>
+                    <div class="conf-item"><strong>Target Language Variant:</strong> <span id="reviewLang" style="text-transform: uppercase; font-weight: 700; color: #2563eb;">---</span></div>
                 </div>
 
                 <div class="nav-buttons">
@@ -271,6 +384,18 @@
 </div>
 
 <script>
+    // Universal dictionary translating technical ISO codes into clean English strings for review panels
+    const lqaEnglishNamesDictionary = {
+        "fr-FR": "French", "de-DE": "German", "it-IT": "Italian", "nl-NL": "Dutch",
+        "sv-SE": "Swedish", "no-NO": "Norwegian", "da-DK": "Danish", "fi-FI": "Finnish",
+        "es-ES": "Spanish (Spain)", "es-419": "Spanish (Latin America)", "pt-PT": "Portuguese (Portugal)", "pt-BR": "Portuguese (Brazil)",
+        "ru-RU": "Russian", "pl-PL": "Polish", "cs-CZ": "Czech", "hu-HU": "Hungarian",
+        "el-GR": "Greek", "tr-TR": "Turkish", "uk-UA": "Ukrainian", "ro-RO": "Romanian", "bg-BG": "Bulgarian",
+        "ar-AA": "Arabic", "hi-IN": "Hindi", "zh-CN": "Chinese (Simplified)", "zh-TW": "Taiwanese (Traditional)",
+        "zh-HK": "Cantonese (Traditional)", "ja-JP": "Japanese", "ko-KR": "Korean", "vi-VN": "Vietnamese",
+        "th-TH": "Thai", "ms-MY": "Malay", "id-ID": "Indonesian"
+    };
+
     function toggleDarkMode() {
         const body = document.body;
         const btn = document.getElementById('themeToggle');
@@ -294,23 +419,23 @@
         const hiddenInput = document.getElementById('candidateLanguage');
         if (hiddenInput) {
             hiddenInput.value = langCode;
-            // Clears any HTML5 validation flag constraint states instantly upon card choice
             hiddenInput.setCustomValidity("");
         }
     }
 
-    // Fires instantly only if HTML5 validation parameters are fully verified
     function navigateToReviewVerification() {
         const first = document.getElementById('firstName').value.trim();
         const last = document.getElementById('lastName').value.trim();
         const email = document.getElementById('candidateEmail').value.trim();
         const lang = document.getElementById('candidateLanguage').value;
 
-        // Populate text targets within Page 2 layout viewports
+        // Fetch the clean English equivalent name from the mapped dictionary matrix
+        const cleanEnglishLangName = lqaEnglishNamesDictionary[lang] || lang;
+
         document.getElementById('reviewFirst').innerText = first;
         document.getElementById('reviewLast').innerText = last;
         document.getElementById('reviewEmail').innerText = email;
-        document.getElementById('reviewLang').innerText = lang;
+        document.getElementById('reviewLang').innerText = cleanEnglishLangName;
 
         changePageView(2);
     }
@@ -320,13 +445,14 @@
         const last = document.getElementById('lastName').value.trim();
         const email = document.getElementById('candidateEmail').value.trim();
         const lang = document.getElementById('candidateLanguage').value;
+        const cleanEnglishLangName = lqaEnglishNamesDictionary[lang] || lang;
 
         document.getElementById('sendInviteBtn').disabled = true;
 
         const notificationPayload = `### ✉️ New LQA Test Invitation Issued\n\n` +
             `**Candidate:** ${last} ${first}\n` +
             `**Email:** ${email}\n` +
-            `**Target Language:** ${lang}\n\n` +
+            `**Target Language:** ${cleanEnglishLangName} (${lang})\n\n` +
             `*Automated generation link workflow initialized successfully.*`;
 
         fetch('https://votre-serveur.com', {
@@ -340,7 +466,7 @@
         .then(() => changePageView(3))
         .catch(err => {
             console.error("Payload tracking error handled gracefully:", err);
-            changePageView(3); // Allows local testing viewport progression
+            changePageView(3);
         });
     }
 
